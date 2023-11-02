@@ -1,7 +1,7 @@
 import type { Access } from 'payload/config'
 
+import type { User } from '../../../payload-types'
 import { isSuperAdmin } from '../../../utilities/isSuperAdmin'
-import { User } from '../../../payload-types'
 
 export const adminsAndSelf: Access<any, User> = async ({ req: { user } }) => {
   if (user) {
@@ -25,7 +25,7 @@ export const adminsAndSelf: Access<any, User> = async ({ req: { user } }) => {
               {
                 'tenants.tenant': {
                   in: [
-                    typeof user?.lastLoggedInTenant === 'string'
+                    typeof user?.lastLoggedInTenant === 'number'
                       ? user?.lastLoggedInTenant
                       : user?.lastLoggedInTenant?.id,
                   ].filter(Boolean),
@@ -39,7 +39,7 @@ export const adminsAndSelf: Access<any, User> = async ({ req: { user } }) => {
                     user?.tenants
                       ?.map(({ tenant, roles }) =>
                         roles.includes('admin')
-                          ? typeof tenant === 'string'
+                          ? typeof tenant === 'number'
                             ? tenant
                             : tenant.id
                           : null,

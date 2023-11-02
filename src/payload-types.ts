@@ -17,18 +17,18 @@ export interface Config {
   globals: {};
 }
 export interface User {
-  id: string;
+  id: number;
   firstName?: string | null;
   lastName?: string | null;
   roles: ('super-admin' | 'user')[];
   tenants?:
     | {
-        tenant: string | Tenant;
+        tenant: number | Tenant;
         roles: ('admin' | 'user')[];
         id?: string | null;
       }[]
     | null;
-  lastLoggedInTenant?: (string | null) | Tenant;
+  lastLoggedInTenant?: (number | null) | Tenant;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -41,7 +41,7 @@ export interface User {
   password: string | null;
 }
 export interface Tenant {
-  id: string;
+  id: number;
   name: string;
   domains?:
     | {
@@ -53,10 +53,10 @@ export interface Tenant {
   createdAt: string;
 }
 export interface Page {
-  id: string;
+  id: number;
   title: string;
   slug?: string | null;
-  tenant?: (string | null) | Tenant;
+  tenant?: (number | null) | Tenant;
   richText: {
     [k: string]: unknown;
   }[];
@@ -64,10 +64,10 @@ export interface Page {
   createdAt: string;
 }
 export interface PayloadPreference {
-  id: string;
+  id: number;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   key?: string | null;
   value?:
@@ -83,7 +83,7 @@ export interface PayloadPreference {
   createdAt: string;
 }
 export interface PayloadMigration {
-  id: string;
+  id: number;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;

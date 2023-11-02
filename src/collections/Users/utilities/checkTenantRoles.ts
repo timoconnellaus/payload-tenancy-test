@@ -6,12 +6,12 @@ export const checkTenantRoles = (
   tenant: User['tenants'][0]['tenant'] = undefined,
 ): boolean => {
   if (tenant) {
-    const id = typeof tenant === 'string' ? tenant : tenant?.id
+    const id = typeof tenant === 'number' ? tenant : tenant?.id
 
     if (
       allRoles.some(role => {
         return user?.tenants?.some(({ tenant: userTenant, roles }) => {
-          const tenantID = typeof userTenant === 'string' ? userTenant : userTenant?.id
+          const tenantID = typeof userTenant === 'number' ? userTenant : userTenant?.id
           return tenantID === id && roles?.includes(role)
         })
       })
